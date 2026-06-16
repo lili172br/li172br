@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+    <!-- Google AdSense 廣告腳本 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9874958587973886" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-color-scale=1.0, user-scalable=no">
     <title>li_172.br // Central Hub</title>
+    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -53,6 +55,9 @@
 </head>
 <body class="flex flex-col items-center justify-start min-h-screen px-5 py-8 sm:justify-center animate-fade-in">
 
+    <!-- ==========================================
+         1. 賽博風格過場動畫遮罩層 (Scene Loader)
+         ========================================== -->
     <div id="scene-loader" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-all duration-300 z-50 flex flex-col items-center justify-center space-y-2">
         <div class="text-[10px] text-red-600 font-mono tracking-[0.3em] uppercase opacity-0 transition-opacity duration-200" id="loader-text">
             INITIALIZING_NODE_TRANSFER...
@@ -62,8 +67,12 @@
         </div>
     </div>
 
+    <!-- 主容器 -->
     <main class="max-w-md w-full text-center space-y-7 my-auto py-4">
         
+        <!-- ==========================================
+             Header 數據區
+             ========================================== -->
         <header class="space-y-2.5">
             <div class="text-[9px] text-red-600 font-mono tracking-widest uppercase animate-pulse">
                 SYS_STATUS: ACTIVE // LOG_ID: <span id="log-id">7192</span>
@@ -83,6 +92,9 @@
             </div>
         </header>
 
+        <!-- ==========================================
+             Threads 核心按鈕
+             ========================================== -->
         <section class="flex flex-col items-center">
             <button data-href="threads://www.threads.net/@li_172.br" 
                id="threads-link"
@@ -94,6 +106,9 @@
 
         <hr class="border-zinc-900 w-full max-w-[60%] mx-auto my-2">
 
+        <!-- ==========================================
+             子專案傳送門矩陣
+             ========================================== -->
         <section class="space-y-4 text-left">
             <div class="flex justify-between items-center px-1">
                 <h3 class="text-[9px] text-zinc-600 font-mono tracking-[0.25em] uppercase">
@@ -104,6 +119,7 @@
                 </span>
             </div>
             
+            <!-- 專案 01：社群陰暗面 -->
             <button data-href="./1-quiz-social-dark/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-200">
@@ -118,6 +134,7 @@
                 </p>
             </button>
 
+            <!-- 專案 02：鐵拳教育 -->
             <button data-href="./2quiz-iron-fist/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-200">
@@ -132,6 +149,7 @@
                 </p>
             </button>
 
+            <!-- 未來項目預告 (已拔除 NODE3 字樣) -->
             <div class="block project-card locked p-6 rounded-xl opacity-30">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-600">
@@ -148,8 +166,9 @@
             
         </section>
 
+        <!-- 頁尾 -->
         <footer class="text-[9px] text-zinc-700 font-mono pt-2 tracking-widest">
-            CORE_SYS_V3.6_CINEMATIC // © 2026 li_172.br.
+            CORE_SYS_V3.7_CINEMATIC // © 2026 li_172.br.
         </footer>
         
     </main>
@@ -247,6 +266,34 @@
 
         document.addEventListener('click', initAudio, { once: true });
         document.addEventListener('touchstart', initAudio, { once: true });
+
+        // ==========================================
+        // 6. 核心修復：防止瀏覽器「返回」時卡在全黑過場
+        // ==========================================
+        window.addEventListener('pageshow', function (event) {
+            // 如果網頁是從瀏覽器歷史紀錄返回（快取載入）
+            if (event.persisted) {
+                const loader = document.getElementById('scene-loader');
+                const loaderText = document.getElementById('loader-text');
+                const loaderSubtext = document.getElementById('loader-subtext');
+                
+                // 重置遮罩層，解鎖網頁功能
+                loader.classList.add('pointer-events-none');
+                loader.classList.remove('opacity-100');
+                loader.classList.add('opacity-0');
+                
+                // 隱藏文字
+                loaderText.classList.remove('opacity-100', 'animate-pulse');
+                loaderSubtext.classList.remove('opacity-100');
+                loaderText.classList.add('opacity-0');
+                loaderSubtext.classList.add('opacity-0');
+
+                // 釋放按鈕狀態，允許重新點擊
+                document.querySelectorAll('.play-sound').forEach(btn => {
+                    btn.classList.remove('navigating');
+                });
+            }
+        });
     </script>
 </body>
 </html>
