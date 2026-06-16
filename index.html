@@ -5,7 +5,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9874958587973886" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-color-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>li_172.br // Central Hub</title>
     <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -119,8 +119,8 @@
                 </span>
             </div>
             
-            <!-- 專案 01：社群陰暗面 -->
-            <button data-href="./1-quiz-social-dark/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
+            <!-- 專案 01：社群陰暗面（路徑已變更為 ./1/index.html） -->
+            <button data-href="./1/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-200">
                         🔮 社群陰暗面 // 潛意識面具
@@ -134,8 +134,8 @@
                 </p>
             </button>
 
-            <!-- 專案 02：鐵拳教育 -->
-            <button data-href="./2quiz-iron-fist/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
+            <!-- 專案 02：鐵拳教育（路徑已變更為 ./2/index.html） -->
+            <button data-href="./2/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-200">
                         🥊 鐵拳教育 // 潛意識人格審判
@@ -149,7 +149,7 @@
                 </p>
             </button>
 
-            <!-- 未來項目預告 (已拔除 NODE3 字樣) -->
+            <!-- 未來項目預告 -->
             <div class="block project-card locked p-6 rounded-xl opacity-30">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-600">
@@ -271,7 +271,6 @@
         // 6. 核心修復：防止瀏覽器「返回」時卡在全黑過場
         // ==========================================
         window.addEventListener('pageshow', function (event) {
-            // 如果網頁是從瀏覽器歷史紀錄返回（快取載入）
             if (event.persisted) {
                 const loader = document.getElementById('scene-loader');
                 const loaderText = document.getElementById('loader-text');
