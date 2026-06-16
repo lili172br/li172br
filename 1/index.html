@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <!-- Google AdSense 廣告腳本 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9874958587973886" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
@@ -18,9 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="榮格八維人格鑑定">
 
-    <!-- 引入 Tailwind CSS 驅動主視覺 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入 html2canvas 截圖套件 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
@@ -70,16 +67,12 @@
 
     <div class="max-w-xl w-full mx-auto space-y-6 my-auto">
         
-        <!-- ==========================================
-             第一階段：學術介紹首頁 (Landing Page)
-             ========================================== -->
         <div id="landing-stage" class="space-y-6">
             <header class="text-center border-b border-zinc-900 pb-6">
                 <h1 class="text-xl font-bold tracking-wider text-white mb-2">心理學特展：社群陰暗面研究</h1>
                 <div class="text-[11px] text-zinc-500 tracking-widest uppercase">基於榮格（Carl Jung）原型理論與認知功能指標</div>
             </header>
 
-            <!-- 呼籲行動區塊 (CTA) -->
             <section class="cyber-panel border rounded-2xl p-6 text-center space-y-4 shadow-2xl">
                 <p class="text-xs font-bold text-red-500 tracking-widest uppercase animate-pulse">
                     🔥 榮格八維「社群陰暗面」人格鑑定已正式上線
@@ -87,12 +80,11 @@
                 <p class="text-xs text-zinc-400 leading-relaxed max-w-sm mx-auto">
                     12 道直覺二選一情境題，解構你隱藏在螢幕背後的潛意識面具。
                 </p>
-                <button onclick="activateQuizStage()" class="btn-action inline-block bg-white text-black font-bold text-xs tracking-widest px-8 py-3.5 rounded-full hover:scale-105">
+                <button id="start-quiz-btn" class="btn-action inline-block bg-white text-black font-bold text-xs tracking-widest px-8 py-3.5 rounded-full hover:scale-105">
                     立即進入完整測驗 →
                 </button>
             </section>
 
-            <!-- 學術範疇介紹 -->
             <section class="space-y-5 text-sm text-zinc-400">
                 <div class="space-y-2">
                     <h2 class="text-xs font-bold text-white border-l-2 border-white pl-2 tracking-wider">關於榮格八維（Cognitive Functions）</h2>
@@ -126,11 +118,7 @@
             </footer>
         </div>
 
-        <!-- ==========================================
-             第二階段：測驗題目畫面 (Quiz Stage)
-             ========================================== -->
         <div id="quiz-stage" class="cyber-panel border border-zinc-800 rounded-2xl p-6 space-y-6 hidden shadow-2xl">
-            <!-- 進度條 -->
             <div class="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden">
                 <div id="progress-bar" class="h-full bg-emerald-500 w-0% transition-all duration-300"></div>
             </div>
@@ -140,18 +128,13 @@
                 <div id="q-text" class="text-sm font-bold text-white leading-relaxed text-left min-h-[50px]">載入數據中...</div>
             </div>
 
-            <!-- 二選一選項按鈕 -->
             <div class="flex flex-col gap-3.5">
                 <button id="opt-A" onclick="handleOptionSelection('A')" class="option-btn text-xs text-left text-zinc-300 p-4 rounded-xl leading-relaxed"></button>
                 <button id="opt-B" onclick="handleOptionSelection('B')" class="option-btn text-xs text-left text-zinc-300 p-4 rounded-xl leading-relaxed"></button>
             </div>
         </div>
 
-        <!-- ==========================================
-             第三階段：鑑定結果畫面 (Result Stage)
-             ========================================== -->
         <div id="result-stage" class="space-y-5 hidden">
-            <!-- 可被截圖的精密報告卡片 -->
             <div id="capture-area" class="bg-[#0c0c0c] border-2 border-emerald-500 rounded-2xl p-6 text-center space-y-5 shadow-2xl">
                 <div class="text-[9px] text-emerald-400 font-bold tracking-[0.3em] uppercase">MY SHADOW TYPE // 鑑定報告</div>
                 
@@ -161,10 +144,8 @@
                     <div class="text-[11px] text-zinc-500">全網目前有 <strong id="res-percent" class="text-emerald-400 font-bold text-sm">0%</strong> 的人跟你一樣發瘋</div>
                 </div>
 
-                <!-- 標籤容器 -->
                 <div id="res-tags" class="flex justify-center gap-1.5 flex-wrap"></div>
                 
-                <!-- 數據解碼文字區 -->
                 <div class="text-xs text-left space-y-3.5 bg-zinc-950 p-4 rounded-xl border border-zinc-900">
                     <div>
                         <span class="text-[10px] font-bold text-emerald-400 block mb-0.5">💡 潛意識面貌</span>
@@ -176,7 +157,6 @@
                     </div>
                 </div>
                 
-                <!-- 契合度矩陣 -->
                 <div class="bg-zinc-950 border border-zinc-900 rounded-lg p-3 text-[11px] text-left space-y-1">
                     <div class="text-zinc-400">🤝 大吉契合：<span id="res-good" class="text-zinc-200 font-bold"></span></div>
                     <div class="text-zinc-400">⚡ 天敵死對頭：<span id="res-bad" class="text-red-400 font-bold"></span></div>
@@ -185,7 +165,6 @@
                 <div class="text-[9px] text-zinc-600 tracking-widest font-mono">⚠️ 警語：請立刻關掉手機去摸摸草</div>
             </div>
 
-            <!-- 控制功能按鈕 -->
             <div class="grid grid-cols-2 gap-3">
                 <button onclick="resetEvaluation()" class="btn-action w-full bg-zinc-900 border border-zinc-800 text-zinc-300 font-bold text-xs tracking-widest py-3.5 rounded-full hover:bg-zinc-800">
                     再測一次
@@ -198,9 +177,6 @@
 
     </div>
 
-    <!-- ==========================================
-         核心功能與運算邏輯引擎
-         ========================================== -->
     <script>
         const questions = [
             { type: "T", aScore: "Ti", bScore: "Te", text: "在脆上滑到沒做功課、上網查就有答案的「伸手黨」提問，你直覺是？", aText: "有夠躁，直接在心中翻白眼或開噴，覺得對方沒長腦。", bText: "雖然很瞎，但還是會點開留言區看有沒有人開打，順便吃瓜。" },
@@ -226,32 +202,23 @@
 
         let currentQuestion = 0;
         let userScores = { Ti: 0, Te: 0, Fi: 0, Fe: 0, Si: 0, Se: 0, Ni: 0, Ne: 0 };
-        
-        // ==========================================
-        // 科技感 Web Audio API 音效合成引擎 (已加入安全降級保護)
-        // ==========================================
         let audioCtx = null;
 
+        // 音效模組：全量包裹 try-catch，任何沙盒報錯都不會阻斷主線執行
         function playClickSound(type = 'default') {
             try {
-                // 如果環境封鎖了 AudioContext，直接優雅跳出，不阻斷後續程式碼執行
                 if (!window.AudioContext && !window.webkitAudioContext) return;
-                
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 }
-                
-                // 檢查是否處於被掛起 (suspended) 狀態，如果是，嘗試重啟
-                if (audioCtx.state === 'suspended') {
+                if (audioCtx && audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
                 
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-                
                 const now = audioCtx.currentTime;
                 
                 if (type === 'special') {
@@ -280,23 +247,42 @@
                     osc.stop(now + 0.06);
                 }
             } catch (e) {
-                // 靜默捕獲任何音訊錯誤，確保主程式不受影響
-                console.warn("AudioContext blocked or bypassed safely.");
+                console.warn("Audio Context isolated dynamically.");
             }
         }
 
-        // 切換到測驗畫面
+        // 核心切換邏輯：保證 100% 執行
         function activateQuizStage() {
-            // 先播放音效（失敗也會被 catch 擋住）
+            // 嘗試播放音效（若失敗則會被音效內部的 catch 擋掉，絕不卡死）
             playClickSound('special');
             
-            // 核心狀態變更：強制執行，不受音效影響
-            document.getElementById("landing-stage").style.display = "none";
-            document.getElementById("quiz-stage").style.display = "block";
-            renderQuestion();
+            // 強制切換 DOM 狀態
+            const landing = document.getElementById("landing-stage");
+            const quiz = document.getElementById("quiz-stage");
+            
+            if (landing && quiz) {
+                landing.style.display = "none";
+                quiz.style.display = "block";
+                renderQuestion();
+            }
         }
         
-        // 渲染題目數據
+        // 確保按鈕在任何複雜的 iframe 嵌套中都能精準綁定事件
+        document.addEventListener("DOMContentLoaded", function() {
+            const startBtn = document.getElementById("start-quiz-btn");
+            if (startBtn) {
+                // 清除可能殘留的舊 handler，並重新綁定唯一監聽器
+                startBtn.removeEventListener("click", activateQuizStage);
+                startBtn.addEventListener("click", activateQuizStage);
+            }
+        });
+
+        // 如果頁面已經載入完成但事件未綁上，進行二次兜底檢查
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            const startBtn = document.getElementById("start-quiz-btn");
+            if (startBtn) startBtn.addEventListener("click", activateQuizStage);
+        }
+
         function renderQuestion() { 
             if (currentQuestion >= questions.length) {
                 processEvaluationResult();
@@ -310,7 +296,6 @@
             document.getElementById("opt-B").innerText = q.bText;
         }
         
-        // 處理選擇邏輯
         function handleOptionSelection(choice) { 
             playClickSound('default');
             const q = questions[currentQuestion]; 
@@ -323,12 +308,10 @@
             renderQuestion(); 
         }
         
-        // 計算並展示結果
         function processEvaluationResult() { 
             document.getElementById("quiz-stage").style.display = "none"; 
             document.getElementById("result-stage").style.display = "block";
             
-            // 四大象限權重矩陣交叉判定
             const weights = {
                 "Ti_Ni": userScores.Ti + userScores.Ni,
                 "Fe_Se": userScores.Fe + userScores.Se,
@@ -338,7 +321,6 @@
 
             let resultKey = "Fe_Se";
             let maxWeight = -1;
-
             for (const key in weights) {
                 if (weights[key] > maxWeight) {
                     maxWeight = weights[key];
@@ -347,8 +329,6 @@
             }
 
             const res = results[resultKey]; 
-            
-            // 演算法同余因數動態加成百分比
             const finalPercent = res.basePercent + (maxWeight % 4); 
             
             document.getElementById("res-icon").innerText = res.icon; 
@@ -369,7 +349,6 @@
             });
         }
         
-        // 重置測驗
         function resetEvaluation() { 
             playClickSound('reset');
             currentQuestion = 0; 
@@ -378,23 +357,30 @@
             document.getElementById("landing-stage").style.display = "block"; 
         }
         
-        // 截圖並外鏈跳轉
         function generateSnapshotAndNavigate() {
             playClickSound('special');
-            html2canvas(document.getElementById("capture-area"), { 
-                backgroundColor: "#0c0c0c", 
-                scale: 2,
-                useCORS: true 
-            }).then(canvas => {
-                const link = document.createElement("a");
-                link.download = "my-shadow-type.png";
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-                
-                setTimeout(() => {
+            // html2canvas 包裹 try catch 保護，防止沙盒 CORS 直接炸掉 JS
+            try {
+                html2canvas(document.getElementById("capture-area"), { 
+                    backgroundColor: "#0c0c0c", 
+                    scale: 2,
+                    useCORS: true 
+                }).then(canvas => {
+                    const link = document.createElement("a");
+                    link.download = "my-shadow-type.png";
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                    
+                    setTimeout(() => {
+                        window.open("https://s.shopee.tw/70Hnm7rQGp", "_blank", "noopener,noreferrer");
+                    }, 1000);
+                }).catch(err => {
+                    // 萬一截圖在沙盒裡失敗，依然強制跳轉，不損害業務流程
                     window.open("https://s.shopee.tw/70Hnm7rQGp", "_blank", "noopener,noreferrer");
-                }, 1000);
-            });
+                });
+            } catch (e) {
+                window.open("https://s.shopee.tw/70Hnm7rQGp", "_blank", "noopener,noreferrer");
+            }
         }
     </script>
 </body>
