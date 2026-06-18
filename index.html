@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <!-- Google AdSense 廣告腳本 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9874958587973886" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>li_172.br // Central Hub</title>
-    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -55,9 +53,6 @@
 </head>
 <body class="flex flex-col items-center justify-start min-h-screen px-5 py-8 sm:justify-center animate-fade-in">
 
-    <!-- ==========================================
-         1. 賽博風格過場動畫遮罩層 (Scene Loader)
-         ========================================== -->
     <div id="scene-loader" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-all duration-300 z-50 flex flex-col items-center justify-center space-y-2">
         <div class="text-[10px] text-red-600 font-mono tracking-[0.3em] uppercase opacity-0 transition-opacity duration-200" id="loader-text">
             INITIALIZING_NODE_TRANSFER...
@@ -67,12 +62,8 @@
         </div>
     </div>
 
-    <!-- 主容器 -->
     <main class="max-w-md w-full text-center space-y-7 my-auto py-4">
         
-        <!-- ==========================================
-             Header 數據區
-             ========================================== -->
         <header class="space-y-2.5">
             <div class="text-[9px] text-red-600 font-mono tracking-widest uppercase animate-pulse">
                 SYS_STATUS: ACTIVE // LOG_ID: <span id="log-id">7192</span>
@@ -92,9 +83,6 @@
             </div>
         </header>
 
-        <!-- ==========================================
-             Threads 核心按鈕
-             ========================================== -->
         <section class="flex flex-col items-center">
             <button data-href="threads://www.threads.net/@li_172.br" 
                id="threads-link"
@@ -106,9 +94,6 @@
 
         <hr class="border-zinc-900 w-full max-w-[60%] mx-auto my-2">
 
-        <!-- ==========================================
-             子專案傳送門矩陣
-             ========================================== -->
         <section class="space-y-4 text-left">
             <div class="flex justify-between items-center px-1">
                 <h3 class="text-[9px] text-zinc-600 font-mono tracking-[0.25em] uppercase">
@@ -119,7 +104,6 @@
                 </span>
             </div>
             
-            <!-- 專案 01：社群陰暗面（路徑已變更為 ./1/index.html） -->
             <button data-href="./1/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-200">
@@ -134,7 +118,6 @@
                 </p>
             </button>
 
-            <!-- 專案 02：鐵拳教育（路徑已變更為 ./2/index.html） -->
             <button data-href="./2/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
                 <div class="flex justify-between items-center mb-2.5">
                     <h2 class="text-sm font-bold text-zinc-200">
@@ -149,24 +132,22 @@
                 </p>
             </button>
 
-            <!-- 未來項目預告 -->
-            <div class="block project-card locked p-6 rounded-xl opacity-30">
+            <button data-href="./3/index.html" class="play-sound text-left w-full block project-card p-6 rounded-xl">
                 <div class="flex justify-between items-center mb-2.5">
-                    <h2 class="text-sm font-bold text-zinc-600">
-                        🔒 其他項目開發中
+                    <h2 class="text-sm font-bold text-zinc-200">
+                        ⚡ 時空穿梭系統 // 核心實驗室
                     </h2>
-                    <span class="text-[9px] font-mono text-zinc-600 bg-zinc-950 px-2 py-0.5 rounded border border-zinc-900">
-                        COMPILING
+                    <span class="text-[9px] font-mono text-cyan-400 bg-cyan-950/30 px-2 py-0.5 rounded border border-cyan-900/40">
+                        NEW_NODE
                     </span>
                 </div>
-                <p class="text-xs text-zinc-700 leading-relaxed font-sans">
-                    新矩陣節點正在部署中。核心演算法與全新盲測情境編譯中，敬請期待。
+                <p class="text-xs text-zinc-500 leading-relaxed font-sans">
+                    初始化量子時幕同步核心。支援自訂驗證金鑰與行動代號，動態觀測多維度時間亂流並生成旅行紀念小卡。
                 </p>
-            </div>
+            </button>
             
         </section>
 
-        <!-- 頁尾 -->
         <footer class="text-[9px] text-zinc-700 font-mono pt-2 tracking-widest">
             CORE_SYS_V3.7_CINEMATIC // © 2026 li_172.br.
         </footer>
