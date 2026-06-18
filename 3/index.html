@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>時空穿梭核心實驗室</title>
+    <!-- Google AdSense 驗證代碼 -->
     <meta name="google-adsense-account" content="ca-pub-9874958587973886">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9874958587973886" crossorigin="anonymous"></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 html2canvas 用於前端直接渲染圖片快照 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght=400;700&display=swap');
@@ -103,19 +105,21 @@
             z-index: 50 !important;
             display: inline-block !important;
             line-height: 1.6 !important;
-            padding-bottom: 3px !important; /* 加強防範中文字體底部切邊 */
+            padding-bottom: 4px !important; /* 加強防範中文字體底部切邊 */
             overflow: visible !important;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-start p-4 select-none relative">
 
+    <!-- 全局音效開關 -->
     <div class="fixed top-4 right-4 z-50">
         <button id="audio-toggle" onclick="toggleAudio()" class="px-3 py-1.5 border border-cyan-500 bg-zinc-950 text-cyan-400 font-mono text-[10px] uppercase tracking-wider hover:text-white hover:border-white transition-all rounded">
             系統音效：已開啟 🔊
         </button>
     </div>
 
+    <!-- ==================== 第一階段：首頁說明頁面 ==================== -->
     <main id="landing-page" class="max-w-md w-full border border-slate-800 bg-[#050810] p-6 md:p-8 relative rounded-md shadow-[0_0_50px_rgba(0,0,0,0.8)] my-4">
         <header class="mb-6 border-b border-zinc-900 pb-4 relative">
             <div class="absolute top-0 right-0 flex items-center gap-1.5 text-[9px] text-cyan-400 font-mono tracking-wider animate-pulse">
@@ -128,6 +132,7 @@
             </div>
         </header>
 
+        <!-- 環境參數觀測盾 -->
         <div class="grid grid-cols-3 gap-2 bg-black/60 p-3 border border-slate-900 rounded font-mono text-[9px] mb-6">
             <div class="border-r border-zinc-800 pr-1">
                 <span class="text-zinc-600 block text-[8px]">LOCAL_GRAVITY</span>
@@ -148,6 +153,7 @@
             <p>本裝置基於相對論時幕修正協定。當我們人為干涉物理時幕增量時，系統周遭將引發不同程度的時間亂流。這並非虛幻的投影，而是量子觀測維度的實時重組。</p>
         </section>
 
+        <!-- 金鑰與行動代號輸入框 -->
         <div class="mt-6 pt-4 border-t border-zinc-900 space-y-4">
             <div class="flex flex-col gap-2 bg-black/50 p-3 border border-slate-800 rounded">
                 <label class="text-xs font-bold text-zinc-300 tracking-wider">【 1. 輸入驗證金鑰（選填） 】</label>
@@ -156,7 +162,7 @@
             </div>
             <div class="flex flex-col gap-2 bg-black/50 p-3 border border-slate-800 rounded">
                 <label class="text-xs font-bold text-zinc-300 tracking-wider">【 2. 輸入行動代號（選填） 】</label>
-                <input type="text" id="operation-code" placeholder="例如：OPERATION_CHRONOS" 
+                <input type="text" id="operation-code" placeholder="example: OPERATION_CHRONOS" 
                     class="bg-zinc-950 border border-zinc-700 text-purple-400 font-mono text-sm p-2.5 outline-none focus:border-purple-500 uppercase tracking-widest placeholder-zinc-700 rounded">
             </div>
         </div>
@@ -166,10 +172,12 @@
             <span>CHRONO_CORE // #2026-FIST-X</span>
         </div>
         
+        <!-- 【核心主控按鈕】 -->
         <button onclick="startTerminal()" class="block w-full py-4 bg-white text-black text-center font-black uppercase tracking-widest hover:bg-cyan-500 hover:text-white transition-all duration-300 btn-glow text-xs mb-8 rounded">
             初始化時幕終端 ENTER_CORE
         </button>
 
+        <!-- 廣告與延伸技術細節區塊 -->
         <div class="mt-4 pt-6 border-t-2 border-dashed border-zinc-900 space-y-8">
             <section class="text-xs font-mono">
                 <h2 class="text-sm tracking-wider uppercase text-zinc-200">// 核心硬體實時監測矩陣</h2>
@@ -245,6 +253,7 @@
     </main>
 
 
+    <!-- ==================== 第二階段：時空穿梭操作面板 ==================== -->
     <main id="main-frame" class="crt-screen max-w-md w-full border-2 border-slate-800 bg-[#050810] p-6 md:p-8 relative tracking-widest shadow-[0_0_50px_rgba(0,0,0,0.8)] rounded-md overflow-hidden hidden my-4">
         
         <header class="mb-6 flex justify-between items-start border-b border-slate-900 pb-4 relative z-20">
@@ -306,14 +315,17 @@
             執行時幕同步 // START_SYNC
         </button>
 
+        <!-- 進度條與日誌（🔧 物理層面防線：解開高度枷鎖，加入上下 padding，確保警報絕對不被切邊） -->
         <div id="progress-wrapper" class="mt-8 hidden space-y-4 relative z-20">
             <div class="bg-black border border-slate-900 p-3 font-mono text-center">
                 <div id="matrix-bar" class="text-zinc-800 text-xl font-black tracking-[0.15em] pt-2 select-none">
                     ░░░░░░░░░░░░░░░░░░░░
                 </div>
             </div>
-            <div id="log-console" class="text-[13px] text-zinc-300 font-mono min-h-[32px] py-1.5 overflow-visible border-l-2 border-cyan-500 bg-black/40 pl-2 font-bold flex items-center">
-                <div class="w-full leading-relaxed"><span id="log-text">&gt; 模組就緒</span><span id="cursor" class="terminal-cursor ml-0.5 text-cyan-400">█</span></div>
+            <div id="log-console" class="text-[12px] text-zinc-300 font-mono h-auto py-2.5 border-l-2 border-cyan-500 bg-black/40 pl-2 font-bold flex items-center overflow-visible">
+                <div class="w-full leading-loose overflow-visible block py-1" style="height: auto !important; min-height: 24px;">
+                    <span id="log-text" class="inline-block overflow-visible select-none">&gt; 模組就緒</span><span id="cursor" class="terminal-cursor ml-0.5 text-cyan-400">█</span>
+                </div>
             </div>
         </div>
 
@@ -323,21 +335,25 @@
     </main>
 
 
+    <!-- ==================== 第三階段：社群分享精美紀念小卡介面 ==================== -->
     <main id="share-screen" class="max-w-md w-full flex flex-col items-center hidden my-4">
         
+        <!-- 卡片實體渲染區 -->
         <div id="capture-card" class="card-bg-pattern w-full border-2 border-zinc-800 p-6 rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.15)] relative flex flex-col gap-5 overflow-visible" style="width: 100%; max-width: 400px;">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-rose-500 z-50"></div>
             
-            <div class="flex justify-between items-start gap-4 overflow-visible w-full">
-                <div class="flex-1 min-w-0">
+            <!-- 頂部排版（🔧 物理層面防線：改用 absolute 定位釘死在右上角，內嵌不換行樣式，決不被標題排版擠壓折行） -->
+            <div class="relative w-full pb-4 overflow-visible" style="min-h-12">
+                <div class="pr-[120px]">
                     <span class="text-[10px] font-mono tracking-widest text-zinc-500 block screenshot-text-safe">CHRONO_PASSPORT</span>
                     <h3 class="text-xl font-black text-white tracking-tighter mt-0.5 uppercase screenshot-text-safe">時空秩序旅行證</h3>
                 </div>
-                <div class="flex-shrink-0 border border-cyan-500/50 px-2.5 py-1 rounded text-[9px] font-mono font-bold text-cyan-400 bg-cyan-950/50 whitespace-nowrap overflow-visible shadow-[0_0_8px_rgba(6,182,212,0.2)] screenshot-text-safe">
+                <div class="absolute top-0 right-0 border border-cyan-500/50 px-2 py-1 rounded text-[9px] font-mono font-bold text-cyan-400 bg-cyan-950/50 shadow-[0_0_8px_rgba(6,182,212,0.2)] screenshot-text-safe" style="white-space: nowrap !important; display: inline-block !important;">
                     驗證核准 № 884-A
                 </div>
             </div>
 
+            <!-- 金鑰與代號印章 -->
             <div class="font-mono text-[10px] bg-black/60 border border-zinc-900/80 p-3 rounded space-y-3 overflow-visible">
                 <div class="block w-full overflow-visible pb-1">
                     <span class="text-zinc-600 block text-[9px] uppercase font-bold screenshot-text-safe">驗證金鑰 ACCESS_KEY:</span>
@@ -349,6 +365,7 @@
                 </div>
             </div>
 
+            <!-- 時間結果 -->
             <div class="bg-black/80 border border-zinc-800 rounded-lg p-4 text-center relative overflow-visible">
                 <div class="absolute -top-2 left-4 px-1.5 bg-zinc-900 text-[8px] font-mono text-zinc-500 screenshot-text-safe">ARRIVED_TARGET_MATRIX</div>
                 <p class="text-[10px] text-zinc-500 tracking-widest mb-1.5 uppercase font-mono screenshot-text-safe">// 已定錨目標時間線 //</p>
@@ -357,6 +374,7 @@
                 </div>
             </div>
 
+            <!-- 旅行數據 -->
             <div class="grid grid-cols-2 gap-3 font-mono text-xs overflow-visible">
                 <div class="bg-zinc-900/40 p-2.5 border border-zinc-850 rounded overflow-visible">
                     <span class="text-[9px] text-zinc-600 block screenshot-text-safe">維度跳躍跨度</span>
@@ -368,6 +386,7 @@
                 </div>
             </div>
 
+            <!-- 語錄 -->
             <div class="bg-gradient-to-br from-zinc-900 to-black p-3.5 border border-zinc-800 rounded-lg relative overflow-visible">
                 <span class="absolute top-2 right-3 text-xl text-zinc-800 font-serif screenshot-text-safe">“</span>
                 <span class="text-[9px] font-mono text-purple-400 block mb-1 screenshot-text-safe">◆ 量子觀測評語 //</span>
@@ -376,6 +395,7 @@
                 </p>
             </div>
 
+            <!-- 頁尾條碼 -->
             <div class="flex justify-between items-center border-t border-zinc-900 pt-3 mt-1 overflow-visible">
                 <div class="font-mono text-[8px] text-zinc-600 uppercase screenshot-text-safe">
                     <p>Origin: SHILIN_TAIPEI</p>
@@ -644,7 +664,7 @@
                     if (ratio > 0.3 && ratio < 0.85 && rng < 0.42) {
                         currentTurbulence = Math.random() * 2.2 + 7.6; 
                         if (currentTurbulence > maxTurbulenceRecorded) maxTurbulenceRecorded = currentTurbulence;
-                        logText.innerHTML = `<span class='text-rose-500 font-bold break-all screenshot-text-safe'>&gt; [CRITICAL] 核心偏轉 ${currentTurbulence.toFixed(2)} 級！觸發維度警報！</span>`;
+                        logText.innerHTML = `<span class='text-rose-500 font-bold tracking-normal screenshot-text-safe' style='display:inline-block !important;'>&gt; [CRITICAL] 核心偏轉 ${currentTurbulence.toFixed(2)} 級！觸發維度警報！</span>`;
                         mainFrame.classList.add('sys-alert-flash');
                         document.getElementById('turbulence-display').innerText = `${currentTurbulence.toFixed(2)} 級`;
                         startAlertSound(); 
@@ -652,7 +672,7 @@
                     } else {
                         currentTurbulence = Math.random() * 2.0 + 1.5;
                         if (currentTurbulence > maxTurbulenceRecorded) maxTurbulenceRecorded = currentTurbulence;
-                        logText.innerHTML = `<span class='text-cyan-400 break-all screenshot-text-safe'>&gt; 相位修正中... 剩餘 ${(Math.ceil((totalMs-elapsed)/1000))} 秒</span>`;
+                        logText.innerHTML = `<span class='text-cyan-400 tracking-normal screenshot-text-safe' style='display:inline-block !important;'>&gt; 相位修正中... 剩餘 ${(Math.ceil((totalMs-elapsed)/1000))} 秒</span>`;
                         mainFrame.classList.remove('sys-alert-flash');
                         document.getElementById('turbulence-display').innerText = `${currentTurbulence.toFixed(2)} 級`;
                         stopAlertSound(); 
