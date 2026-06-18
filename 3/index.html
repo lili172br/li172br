@@ -5,24 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>時空穿梭核心實驗室</title>
     
-    <meta name="description" content="歡迎來到時空穿梭核心實驗室，本裝置基於相對論時幕修正協定，為您提供精準的時間折疊量子觀測維度實時重組體驗。">
-    <meta name="keywords" content="時空穿梭, 時間旅行, 量子力學, 時幕同步, 核心實驗室">
-    
+    <meta property="og:title" content="時空穿梭計畫 // 核心實驗室">
+    <meta property="og:description" content="本裝置基於相對論時幕修正協定。引發不同程度的時間亂流，實時重組量子觀測維度。">
+    <meta property="og:image" content="social-preview.png">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="時空穿梭核心實驗室 — 進入時幕終端">
-    <meta property="og:description" content="本裝置基於相對論時幕修正協定，點擊初始化進入量子觀測維度實時重組。">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1200&h=630&q=80">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://yourdomain.com/">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="時空穿梭核心實驗室 — 進入時幕終端">
-    <meta name="twitter:description" content="點擊初始化進入量子觀測維度實時重組，體驗高階時間旅行折疊。">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1200&h=630&q=80">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=32&h=32&q=80">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=180&h=180&q=80">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="時空穿梭計畫 // 核心實驗室">
+    <meta name="twitter:description" content="本裝置基於相對論時幕修正協定。引發不同程度的時間亂流，實時重組量子觀測維度。">
+    <meta name="twitter:image" content="social-preview.png">
 
     <meta name="google-adsense-account" content="ca-pub-9874958587973886">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9874958587973886" crossorigin="anonymous"></script>
@@ -117,7 +108,7 @@
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
 
-        /* 針對截圖與動態渲染強化的防切邊安全 CSS 防線 */
+        /* 🚀 針對截圖與動態渲染強化的防切邊安全 CSS 防線 */
         .screenshot-text-safe {
             position: relative !important;
             z-index: 50 !important;
@@ -523,7 +514,6 @@
             } catch(e) {}
         }
 
-        // 🔧 已修復原始代碼底部的語法截斷 (gain.conn..)
         function playTone(freq, duration, type = 'sine', volume = 0.08) {
             if (!audioEnabled || !audioCtx || audioCtx.state === 'suspended') return;
             try {
@@ -534,142 +524,232 @@
                 gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
                 osc.connect(gain); gain.connect(audioCtx.destination);
                 osc.start(); osc.stop(audioCtx.currentTime + duration);
-            } catch(e) {}
+            } catch (e) {}
+        }
+
+        function startAlertSound() {
+            if (!audioEnabled || !audioCtx || alertInterval) return;
+            alertInterval = setInterval(() => {
+                try {
+                    const now = audioCtx.currentTime;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sawtooth'; osc.frequency.setValueAtTime(660, now); 
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.18);
+                    osc.connect(gain); gain.connect(audioCtx.destination);
+                    osc.start(); osc.stop(now + 0.2);
+                } catch(e){}
+            }, 300);
         }
 
         function stopAlertSound() {
             if (alertInterval) { clearInterval(alertInterval); alertInterval = null; }
         }
 
-        function stepTimeValue(val) {
-            const el = document.getElementById('time-val');
-            let current = parseInt(el.value) || 5;
-            current += val;
-            if (current < 1) current = 1;
-            if (current > 999) current = 999;
-            el.value = current;
-            playTone(400, 0.05, 'sine', 0.05);
+        function updateShieldData() {
+            if (!document.getElementById('landing-page').classList.contains('hidden')) {
+                document.getElementById('shield-grav').innerText = `${(9.7820 + Math.random() * 0.0004).toFixed(4)} m/s²`;
+                document.getElementById('shield-entr').innerText = (1.2440 + Math.random() * 0.05).toFixed(4);
+                document.getElementById('shield-flux').innerText = `${(12.1 + Math.random() * 0.6).toFixed(1)} nT`;
+                document.getElementById('stat-temp').innerText = `${(40 + Math.random() * 4).toFixed(1)} °C`;
+                document.getElementById('stat-load').innerText = `${(1.20 + Math.random() * 0.08).toFixed(2)}V`;
+            }
+            setTimeout(updateShieldData, 600);
         }
+
+        generateRandomBroadcasts();
+        updateShieldData();
+        setInterval(generateRandomBroadcasts, 15000);
 
         function startTerminal() {
             initAudio();
-            playTone(880, 0.1, 'sine', 0.1);
-            
-            const key = document.getElementById('access-key').value.trim() || 'GUEST_DEFAULT_2026';
-            const code = document.getElementById('operation-code').value.trim() || 'UNNAMED_ACTION';
-            
-            document.getElementById('panel-key-display').innerText = key.toUpperCase();
-            document.getElementById('panel-code-display').innerText = code.toUpperCase();
-            document.getElementById('card-key-display').innerText = key.toUpperCase();
-            document.getElementById('card-code-display').innerText = code.toUpperCase();
+            playTone(800, 0.05, 'sine', 0.1);
+
+            const keyVal = document.getElementById('access-key').value.trim().toUpperCase();
+            const codeVal = document.getElementById('operation-code').value.trim().toUpperCase();
+
+            document.getElementById('panel-key-display').innerText = keyVal || "DEFAULT_GUEST";
+            document.getElementById('panel-code-display').innerText = codeVal || "UNNAMED_ACTION";
 
             document.getElementById('landing-page').classList.add('hidden');
             document.getElementById('main-frame').classList.remove('hidden');
-            
-            updateVfdClock();
-            setInterval(updateVfdClock, 500);
-            setInterval(randomizeHardwareStats, 3000);
+            calculateTargetTime();
         }
 
-        function updateVfdClock() {
-            const screen = document.getElementById('vfd-screen');
-            if (!screen || isRunning) return;
-            const now = new Date();
-            screen.innerText = now.toLocaleString('zh-TW', { hour12: false });
+        function stepTimeValue(amount) {
+            if (isLocked) return;
+            initAudio();
+            playTone(900, 0.01, 'triangle', 0.1);
+            const input = document.getElementById('time-val');
+            let newVal = (parseInt(input.value) || 1) + amount;
+            input.value = Math.max(1, Math.min(999, newVal));
+            calculateTargetTime();
         }
 
-        function randomizeHardwareStats() {
-            if (document.getElementById('landing-page').classList.contains('hidden') && !isRunning) {
-                currentTurbulence = (0.05 + Math.random() * 0.15).toFixed(2);
-                document.getElementById('turbulence-display').innerText = `${currentTurbulence} 級`;
-                document.getElementById('hex-stream').innerText = '0x' + Math.floor(Math.random()*65535).toString(16).toUpperCase();
-            }
+        function calculateTargetTime() {
+            const val = parseInt(document.getElementById('time-val').value) || 0;
+            const unit = document.getElementById('time-unit').value;
+            let target = new Date();
+            if (unit === 'yr') target.setFullYear(target.getFullYear() + val);
+            if (unit === 'day') target.setDate(target.getDate() + val);
+            if (unit === 'hr') target.setHours(target.getHours() + val);
+            if (unit === 'min') target.setMinutes(target.getMinutes() + val);
+            if (unit === 'sec') target.setSeconds(target.getSeconds() + val);
+
+            const pad = n => String(n).padStart(2, '0');
+            document.getElementById('vfd-screen').innerText = `${target.getFullYear()}年${pad(target.getMonth()+1)}月${pad(target.getDate())}日 ${pad(target.getHours())}:${pad(target.getMinutes())}:${pad(target.getSeconds())}`;
+            return Math.max(0, Math.floor((target.getTime() - new Date().getTime()) / 1000));
         }
 
-        // 模擬進度與後續跳轉的占位處理（配合原 index.html 架構）
-        document.addEventListener('DOMContentLoaded', () => {
-            generateRandomBroadcasts();
-            setInterval(generateRandomBroadcasts, 15000);
+        setInterval(() => {
+            if (isLocked || isCoolingDown) return;
+            calculateTargetTime();
+            currentTurbulence = Math.random() * 0.3 + 0.05;
+            document.getElementById('turbulence-display').innerText = `${currentTurbulence.toFixed(2)} 級`;
+            document.getElementById('hex-stream').innerText = "0x" + Math.floor(Math.random() * 65535).toString(16).toUpperCase().padStart(4, '0');
+        }, 1000);
 
-            document.getElementById('btn-start').addEventListener('click', () => {
-                if (isRunning) return;
-                isRunning = true;
-                initAudio();
-                const wrapper = document.getElementById('progress-wrapper');
-                const logText = document.getElementById('log-text');
-                const bar = document.getElementById('matrix-bar');
-                
-                wrapper.classList.remove('hidden');
-                logText.innerText = "> 正在鎖定時間軸共振器...";
-                
-                let pct = 0;
-                const intv = setInterval(() => {
-                    pct += 10;
-                    let blocks = "";
-                    for(let i=0; i<20; i++) {
-                        blocks += i < (pct/5) ? "█" : "░";
+        document.getElementById('time-unit').addEventListener('change', () => calculateTargetTime());
+        document.getElementById('time-val').addEventListener('input', () => calculateTargetTime());
+
+        const btn = document.getElementById('btn-start');
+        const mainFrame = document.getElementById('main-frame');
+        const progressWrapper = document.getElementById('progress-wrapper');
+        const matrixBar = document.getElementById('matrix-bar');
+        const logText = document.getElementById('log-text');
+        const footer = document.getElementById('system-footer');
+
+        btn.addEventListener('click', function() {
+            initAudio();
+            if (isRunning) { location.reload(); return; }
+
+            const totalSeconds = calculateTargetTime();
+            if (totalSeconds <= 0) return;
+
+            isRunning = true; isLocked = true; maxTurbulenceRecorded = 0.10;
+            document.getElementById('time-val').disabled = true;
+            document.getElementById('time-unit').disabled = true;
+            document.getElementById('btn-plus').disabled = true;
+            document.getElementById('btn-minus').disabled = true;
+
+            btn.innerText = "🚨 核心負載過載 // 緊急中止";
+            btn.className = "w-full py-4 bg-red-950/40 border-2 border-red-700 text-red-400 text-[14px] font-black tracking-[0.3em] rounded abort-glow";
+            progressWrapper.classList.remove('hidden');
+            mainFrame.classList.add('sys-load-shake');
+            footer.innerText = "// 系統狀態：同步序列執行中";
+
+            const startTime = Date.now();
+            const totalMs = Math.min(totalSeconds * 1000, 6000); 
+
+            function runSequence() {
+                if (!isRunning) return;
+                const elapsed = Date.now() - startTime;
+                const ratio = Math.min(elapsed / totalMs, 1);
+                const blockCount = Math.floor(ratio * 20);
+                matrixBar.innerHTML = `<span class="text-cyan-400">${"█".repeat(blockCount)}</span><span class="text-zinc-900">${"░".repeat(20 - blockCount)}</span>`;
+                document.getElementById('hex-stream').innerText = "0x" + Math.floor(Math.random() * 65535).toString(16).toUpperCase().padStart(4, '0');
+
+                if (elapsed < totalMs) {
+                    const rng = Math.random();
+                    let nextTick = 300;
+
+                    if (ratio > 0.3 && ratio < 0.85 && rng < 0.42) {
+                        currentTurbulence = Math.random() * 2.2 + 7.6; 
+                        if (currentTurbulence > maxTurbulenceRecorded) maxTurbulenceRecorded = currentTurbulence;
+                        logText.innerHTML = `<span class='text-rose-500 font-bold tracking-normal screenshot-text-safe' style='display:inline-block !important;'>&gt; [CRITICAL] 核心偏轉 ${currentTurbulence.toFixed(2)} 級！觸發維度警報！</span>`;
+                        mainFrame.classList.add('sys-alert-flash');
+                        document.getElementById('turbulence-display').innerText = `${currentTurbulence.toFixed(2)} 級`;
+                        startAlertSound(); 
+                        nextTick = 200;
+                    } else {
+                        currentTurbulence = Math.random() * 2.0 + 1.5;
+                        if (currentTurbulence > maxTurbulenceRecorded) maxTurbulenceRecorded = currentTurbulence;
+                        logText.innerHTML = `<span class='text-cyan-400 tracking-normal screenshot-text-safe' style='display:inline-block !important;'>&gt; 相位修正中... 剩餘 ${(Math.ceil((totalMs-elapsed)/1000))} 秒</span>`;
+                        mainFrame.classList.remove('sys-alert-flash');
+                        document.getElementById('turbulence-display').innerText = `${currentTurbulence.toFixed(2)} 級`;
+                        stopAlertSound(); 
+                        playTone(480, 0.03, 'sine', 0.06); 
+                        nextTick = 350;
                     }
-                    bar.innerText = blocks;
-                    playTone(600 + pct*2, 0.04, 'sine', 0.03);
+                    timeoutId = setTimeout(runSequence, nextTick);
+                } else {
+                    stopAlertSound();
+                    mainFrame.classList.remove('sys-load-shake', 'sys-alert-flash');
+                    playTone(880, 0.6, 'sine', 0.15);
+                    
+                    document.getElementById('card-arrival-time').innerText = document.getElementById('vfd-screen').innerText;
+                    document.getElementById('card-stride').innerText = `${document.getElementById('time-val').value} ${document.getElementById('time-unit').options[document.getElementById('time-unit').selectedIndex].text}`;
+                    document.getElementById('card-max-turbo').innerText = `${maxTurbulenceRecorded.toFixed(2)} 級 ${maxTurbulenceRecorded >= 7.5 ? '(極度危險)' : '(常規干擾)'}`;
+                    document.getElementById('card-max-turbo').className = maxTurbulenceRecorded >= 7.5 ? "text-rose-500 font-bold" : "text-emerald-400 font-bold";
+                    document.getElementById('card-quote').innerText = `「${threadsQuotes[Math.floor(Math.random() * threadsQuotes.length)]}」`;
 
-                    if (pct === 40) logText.innerText = "> 時幕折疊場建立中...";
-                    if (pct === 80) logText.innerText = "> 正在將觀測資料寫入快取...";
+                    const finalKey = document.getElementById('access-key').value.trim().toUpperCase();
+                    const finalCode = document.getElementById('operation-code').value.trim().toUpperCase();
+                    document.getElementById('card-key-display').innerText = finalKey || "DEFAULT_GUEST";
+                    document.getElementById('card-code-display').innerText = finalCode || "UNNAMED_ACTION";
 
-                    if (pct >= 100) {
-                        clearInterval(intv);
-                        // 計算穿梭後的目標時間顯示
-                        const val = parseInt(document.getElementById('time-val').value) || 5;
-                        const unit = document.getElementById('time-unit').value;
-                        let targetDate = new Date();
-                        
-                        if (unit === 'sec') targetDate.setSeconds(targetDate.getSeconds() + val);
-                        else if (unit === 'min') targetDate.setMinutes(targetDate.getMinutes() + val);
-                        else if (unit === 'hr') targetDate.setHours(targetDate.getHours() + val);
-                        else if (unit === 'day') targetDate.setDate(targetDate.getDate() + val);
-                        else if (unit === 'yr') targetDate.setFullYear(targetDate.getFullYear() + val);
-
-                        document.getElementById('card-arrival-time').innerText = targetDate.toLocaleString('zh-TW', { hour12: false });
-                        document.getElementById('card-stride').innerText = `${val} ${document.getElementById('time-unit').selectedOptions[0].text.replace('單位：','')}`;
-                        
-                        maxTurbulenceRecorded = (4.0 + Math.random() * 5.5).toFixed(2);
-                        document.getElementById('card-max-turbo').innerText = `${maxTurbulenceRecorded} 級`;
-                        document.getElementById('card-quote').innerText = `「${threadsQuotes[Math.floor(Math.random() * threadsQuotes.length)]}」`;
-
-                        // 進入小卡渲染頁面
-                        document.getElementById('main-frame').classList.add('hidden');
-                        document.getElementById('share-screen').classList.remove('remove'); // 防呆
+                    setTimeout(() => {
+                        mainFrame.classList.add('hidden');
                         document.getElementById('share-screen').classList.remove('hidden');
-                        isRunning = false;
-                    }
-                }, 300);
-            });
+                    }, 500);
+                }
+            }
+            timeoutId = setTimeout(runSequence, 400);
         });
 
         function returnToSystem() {
             document.getElementById('share-screen').classList.add('hidden');
             document.getElementById('main-frame').classList.remove('hidden');
-            document.getElementById('progress-wrapper').classList.add('hidden');
+            resetSystemState();
         }
 
         function returnToLanding() {
             document.getElementById('share-screen').classList.add('hidden');
             document.getElementById('landing-page').classList.remove('hidden');
+            resetSystemState();
+        }
+
+        function resetSystemState() {
+            isRunning = false; isLocked = false; isCoolingDown = false;
+            document.getElementById('time-val').disabled = false;
+            document.getElementById('time-unit').disabled = false;
+            document.getElementById('btn-plus').disabled = false;
+            document.getElementById('btn-minus').disabled = false;
+            progressWrapper.classList.add('hidden');
+            btn.innerText = "執行時幕同步 // START_SYNC";
+            btn.className = "w-full py-4 bg-zinc-900 border-2 border-zinc-700 hover:border-cyan-500 text-zinc-300 hover:text-white text-[14px] font-black tracking-[0.3em] transition-all rounded shadow-md relative z-20";
+            footer.innerText = "// 系統狀態：待命區間";
+            calculateTargetTime();
         }
 
         function saveCardAndRedirect() {
             const card = document.getElementById('capture-card');
-            playTone(1000, 0.2, 'sine', 0.1);
+            
             html2canvas(card, {
-                backgroundColor: '#02040a',
-                scale: 2,
+                backgroundColor: '#0d0f14',
+                scale: 3, 
+                logging: false,
                 useCORS: true,
-                logging: false
+                allowTaint: true,
+                windowWidth: 400,
+                windowHeight: 580,
+                onclone: (clonedDoc) => {
+                    const clonedCard = clonedDoc.getElementById('capture-card');
+                    if(clonedCard) {
+                        clonedCard.style.overflow = 'visible';
+                        clonedCard.style.boxShadow = 'none';
+                    }
+                }
             }).then(canvas => {
                 const image = canvas.toDataURL("image/png");
                 const link = document.createElement('a');
-                link.download = `Chrono-Passport-${Date.now()}.png`;
                 link.href = image;
-                link.click();
+                link.download = `ChronoPassport_${Date.now()}.png`;
+                document.body.appendChild(link); link.click(); document.body.removeChild(link);
+                setTimeout(() => { window.location.href = "https://s.shopee.tw/70HrxC2hY9"; }, 1000);
+            }).catch(() => {
+                window.location.href = "https://s.shopee.tw/70HrxC2hY9";
             });
         }
     </script>
