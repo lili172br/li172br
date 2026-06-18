@@ -97,13 +97,13 @@
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
 
-        /* 🚀 針對截圖強化的強制圖層安全 CSS 防線 */
+        /* 🚀 針對截圖與動態渲染強化的防切邊安全 CSS 防線 */
         .screenshot-text-safe {
             position: relative !important;
             z-index: 50 !important;
-            display: block !important;
-            line-height: 1.5 !important;
-            padding-bottom: 2px !important; /* 擴張下襯，防堵中文字體底部切邊 */
+            display: inline-block !important;
+            line-height: 1.6 !important;
+            padding-bottom: 3px !important; /* 加強防範中文字體底部切邊 */
             overflow: visible !important;
         }
     </style>
@@ -171,7 +171,6 @@
         </button>
 
         <div class="mt-4 pt-6 border-t-2 border-dashed border-zinc-900 space-y-8">
-            
             <section class="text-xs font-mono">
                 <h2 class="text-sm tracking-wider uppercase text-zinc-200">// 核心硬體實時監測矩陣</h2>
                 <div class="grid grid-cols-2 gap-2 mt-3 text-[10px]">
@@ -196,7 +195,7 @@
 
             <section class="text-xs text-zinc-400 leading-relaxed">
                 <h2 class="text-sm tracking-wider uppercase text-zinc-200">// 主機硬體架構與環境部署</h2>
-                <p class="mt-2 text-[11px] text-zinc-500">本穿梭協議運作於分散式叢集架構下。為了確保時間折疊密鑰不遭到雜訊干擾，底層節點全面導入高效能企業級雲端硬體配置：</p>
+                <p class="mt-2 text-[11px] text-zinc-500">本穿梭協議運作於分散式叢集架構下。為了確保時間折疊密鑰不遭到雜訊干睞，底層節點全面導入高效能企業級雲端硬體配置：</p>
                 <ul class="list-none mt-2 space-y-1 text-[11px] font-mono text-zinc-400 pl-1">
                     <li><span class="text-cyan-600">■ 運算節點：</span> 雙路高階伺服器處理器，支援高容量 DDR5 ECC 快取記憶體。</li>
                     <li><span class="text-cyan-600">■ 網路通道：</span> 專用 100Gbps 超低延遲光纖傳輸線路，跨區域加密定錨。</li>
@@ -209,8 +208,7 @@
                     <h2 class="text-sm tracking-wider uppercase text-zinc-200">// 臺灣分區實驗節點廣播</h2>
                     <span class="text-[8px] text-cyan-500/60 font-bold animate-pulse mb-3">🔄 15秒自動校準</span>
                 </div>
-                <div id="broadcast-container" class="mt-3 space-y-2.5 bg-black/30 p-3 border border-zinc-900 rounded text-[11px]">
-                    </div>
+                <div id="broadcast-container" class="mt-3 space-y-2.5 bg-black/30 p-3 border border-zinc-900 rounded text-[11px]"></div>
             </section>
 
             <section class="text-xs text-zinc-400 leading-relaxed space-y-3">
@@ -314,8 +312,8 @@
                     ░░░░░░░░░░░░░░░░░░░░
                 </div>
             </div>
-            <div id="log-console" class="text-[13px] text-zinc-300 font-mono h-6 overflow-hidden pl-1 font-bold flex items-center">
-                <span id="log-text">&gt; 模組就緒</span><span id="cursor" class="terminal-cursor ml-0.5 text-cyan-400">█</span>
+            <div id="log-console" class="text-[13px] text-zinc-300 font-mono min-h-[32px] py-1.5 overflow-visible border-l-2 border-cyan-500 bg-black/40 pl-2 font-bold flex items-center">
+                <div class="w-full leading-relaxed"><span id="log-text">&gt; 模組就緒</span><span id="cursor" class="terminal-cursor ml-0.5 text-cyan-400">█</span></div>
             </div>
         </div>
 
@@ -330,12 +328,12 @@
         <div id="capture-card" class="card-bg-pattern w-full border-2 border-zinc-800 p-6 rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.15)] relative flex flex-col gap-5 overflow-visible" style="width: 100%; max-width: 400px;">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-rose-500 z-50"></div>
             
-            <div class="flex justify-between items-start overflow-visible">
-                <div>
+            <div class="flex justify-between items-start gap-4 overflow-visible w-full">
+                <div class="flex-1 min-w-0">
                     <span class="text-[10px] font-mono tracking-widest text-zinc-500 block screenshot-text-safe">CHRONO_PASSPORT</span>
                     <h3 class="text-xl font-black text-white tracking-tighter mt-0.5 uppercase screenshot-text-safe">時空秩序旅行證</h3>
                 </div>
-                <div class="border border-cyan-500/40 px-2 py-0.5 rounded text-[9px] font-mono text-cyan-400 bg-cyan-950/40 whitespace-nowrap screenshot-text-safe">
+                <div class="flex-shrink-0 border border-cyan-500/50 px-2.5 py-1 rounded text-[9px] font-mono font-bold text-cyan-400 bg-cyan-950/50 whitespace-nowrap overflow-visible shadow-[0_0_8px_rgba(6,182,212,0.2)] screenshot-text-safe">
                     驗證核准 № 884-A
                 </div>
             </div>
@@ -646,7 +644,7 @@
                     if (ratio > 0.3 && ratio < 0.85 && rng < 0.42) {
                         currentTurbulence = Math.random() * 2.2 + 7.6; 
                         if (currentTurbulence > maxTurbulenceRecorded) maxTurbulenceRecorded = currentTurbulence;
-                        logText.innerHTML = `<span class='text-rose-500 font-bold'>&gt; [CRITICAL] 核心偏轉 ${currentTurbulence.toFixed(2)} 級！觸發維度警報！</span>`;
+                        logText.innerHTML = `<span class='text-rose-500 font-bold break-all screenshot-text-safe'>&gt; [CRITICAL] 核心偏轉 ${currentTurbulence.toFixed(2)} 級！觸發維度警報！</span>`;
                         mainFrame.classList.add('sys-alert-flash');
                         document.getElementById('turbulence-display').innerText = `${currentTurbulence.toFixed(2)} 級`;
                         startAlertSound(); 
@@ -654,7 +652,7 @@
                     } else {
                         currentTurbulence = Math.random() * 2.0 + 1.5;
                         if (currentTurbulence > maxTurbulenceRecorded) maxTurbulenceRecorded = currentTurbulence;
-                        logText.innerHTML = `<span class='text-cyan-400'>&gt; 相位修正中... 剩餘 ${(Math.ceil((totalMs-elapsed)/1000))} 秒</span>`;
+                        logText.innerHTML = `<span class='text-cyan-400 break-all screenshot-text-safe'>&gt; 相位修正中... 剩餘 ${(Math.ceil((totalMs-elapsed)/1000))} 秒</span>`;
                         mainFrame.classList.remove('sys-alert-flash');
                         document.getElementById('turbulence-display').innerText = `${currentTurbulence.toFixed(2)} 級`;
                         stopAlertSound(); 
@@ -715,17 +713,15 @@
         function saveCardAndRedirect() {
             const card = document.getElementById('capture-card');
             
-            // 完美快照核心設定：防範移動端瀏覽器字體切邊與壓縮
             html2canvas(card, {
                 backgroundColor: '#0d0f14',
-                scale: 3, // 提高到 3 倍高畫質防止文字模糊
+                scale: 3, 
                 logging: false,
                 useCORS: true,
                 allowTaint: true,
                 windowWidth: 400,
                 windowHeight: 580,
                 onclone: (clonedDoc) => {
-                    // 確保複製出的快照節點絕對允許溢出，不實施邊界裁剪
                     const clonedCard = clonedDoc.getElementById('capture-card');
                     if(clonedCard) {
                         clonedCard.style.overflow = 'visible';
